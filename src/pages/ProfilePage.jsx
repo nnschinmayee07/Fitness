@@ -149,7 +149,7 @@ export default function ProfilePage() {
                     </div>
                   )}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Stats (Demo) */}
               <motion.div variants={itemVariants} className="glass-card p-6 rounded-2xl">
