@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import FloatingActionButton from './FloatingActionButton';
-import ProfileMenu from './ProfileMenu';
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -16,8 +15,6 @@ export default function Layout() {
       />
 
       <Navbar toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-
-      <ProfileMenu initials="U" />
 
       <main className="relative z-10">
         <Outlet />
