@@ -19,51 +19,49 @@ function BMICalculator() {
   const [height, setHeight] = useState(175);
   const [weight, setWeight] = useState(74);
   const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
-  const category = bmi < 18.5 ? { label: 'Underweight', color: 'text-cyan-400' }
-    : bmi < 25 ? { label: 'Normal',      color: 'text-purple-400' }
-    : bmi < 30 ? { label: 'Overweight',  color: 'text-cyan-300' }
-    : { label: 'Obese', color: 'text-purple-300' };
+  const category = bmi < 18.5 ? { label: 'Underweight', color: 'text-[#6B705C]' }
+    : bmi < 25 ? { label: 'Normal',      color: 'text-[#C97B63]' }
+    : bmi < 30 ? { label: 'Overweight',  color: 'text-[#6B705C]' }
+    : { label: 'Obese', color: 'text-[#C97B63]' };
   const pct = Math.min(Math.max(((bmi - 10) / 30) * 100, 0), 100);
 
   return (
-    <div className="glass-card p-5 border border-cyan-500/20">
-      <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-        <Calculator className="w-4 h-4 text-cyan-400" /> BMI Calculator
+    <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm">
+      <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center gap-2">
+        <Calculator className="w-4 h-4 text-[#6B705C]" /> BMI Calculator
       </h3>
       <div className="space-y-4">
         <div>
           <div className="flex justify-between text-sm mb-2">
-            <span className="text-gray-400">Height</span>
-            <span className="text-white font-medium">{height} cm</span>
+            <span className="text-[#9B8B7E]">Height</span>
+            <span className="text-[#2B2B2B] font-medium">{height} cm</span>
           </div>
           <input type="range" min="140" max="220" value={height} onChange={e => setHeight(+e.target.value)}
-            className="w-full accent-purple-500 cursor-pointer" />
+            className="w-full accent-[#C97B63] cursor-pointer" />
         </div>
         <div>
           <div className="flex justify-between text-sm mb-2">
-            <span className="text-gray-400">Weight</span>
-            <span className="text-white font-medium">{weight} kg</span>
+            <span className="text-[#9B8B7E]">Weight</span>
+            <span className="text-[#2B2B2B] font-medium">{weight} kg</span>
           </div>
           <input type="range" min="40" max="150" value={weight} onChange={e => setWeight(+e.target.value)}
-            className="w-full accent-cyan-500 cursor-pointer" />
+            className="w-full accent-[#6B705C] cursor-pointer" />
         </div>
 
         <div className="text-center py-4">
-          <p className="font-display font-black text-5xl gradient-text">{bmi}</p>
+          <p className="font-display font-black text-5xl solid-primary">{bmi}</p>
           <p className={`font-semibold mt-1 ${category.color}`}>{category.label}</p>
         </div>
 
         {/* BMI scale */}
         <div>
-          <div className="h-3 rounded-full overflow-hidden" style={{
-            background: 'linear-gradient(90deg, #06b6d4 0%, #a855f7 40%, #a855f7 70%, rgba(168,85,247,0.4) 100%)'
-          }}>
+              <div className="h-3 rounded-full overflow-hidden" style={{ background: 'var(--accent)' }}>
             <div className="relative h-full">
-              <div className="absolute top-0 bottom-0 w-1 bg-white rounded-full shadow-lg"
+              <div className="absolute top-0 bottom-0 w-1 bg-[#2B2B2B] rounded-full shadow-lg"
                 style={{ left: `${pct}%`, transform: 'translateX(-50%)' }} />
             </div>
           </div>
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
+          <div className="flex justify-between text-xs text-[#9B8B7E] mt-1 font-sans">
             <span>Under</span><span>Normal</span><span>Over</span><span>Obese</span>
           </div>
         </div>
@@ -78,12 +76,12 @@ export default function SmartFeaturesSection() {
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-[#F8F5F0] pointer-events-none" />
       <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-12">
           <span className="badge-cyan mb-3 inline-flex"><Sparkles className="w-3 h-3" /> Smart Features</span>
-          <h2 className="section-title">Powered by <span className="gradient-text">Intelligence</span></h2>
-          <p className="text-gray-400 mt-2 max-w-xl mx-auto">
+          <h2 className="section-title">Powered by <span className="solid-primary">Intelligence</span></h2>
+          <p className="text-[#9B8B7E] mt-2 max-w-xl mx-auto">
             Futuristic wellness tools that adapt to your lifestyle and optimize your health journey
           </p>
         </div>
@@ -92,60 +90,60 @@ export default function SmartFeaturesSection() {
           {/* Left column */}
           <div className="space-y-4">
             {/* Mood Tracker */}
-            <div className="glass-card p-5 border border-purple-500/20">
-              <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-                <Smile className="w-4 h-4 text-purple-400" /> Mood Tracker
+            <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm bg-[#F8F5F0]">
+              <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center gap-2">
+                <Smile className="w-4 h-4 text-[#C97B63]" /> Mood Tracker
               </h3>
-              <p className="text-sm text-gray-400 mb-4">How are you feeling today?</p>
+              <p className="text-sm text-[#9B8B7E] mb-4">How are you feeling today?</p>
               <div className="flex justify-between mb-4">
                 {moods.map((m, i) => (
                   <button key={i} onClick={() => setSelectedMood(i)}
-                    className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 ${
-                      selectedMood === i ? 'bg-purple-500/20 border border-purple-500/40 scale-110' : 'hover:bg-white/5'
+                    className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 cursor-pointer ${
+                      selectedMood === i ? 'bg-[#C97B63]/15 border border-[#C97B63]/30 scale-110' : 'hover:bg-black/5'
                     }`}>
                     <span className="text-2xl">{m.emoji}</span>
-                    <span className="text-xs text-gray-500">{m.label}</span>
+                    <span className="text-xs text-[#9B8B7E]">{m.label}</span>
                   </button>
                 ))}
               </div>
-              <div className="glass-card p-3 text-center">
-                <p className="text-sm text-gray-400">AI Insight</p>
-                <p className="text-sm text-white mt-1">
+              <div className="glass-card p-3 text-center border border-[#EFE6DD]">
+                <p className="text-sm text-[#9B8B7E]">AI Insight</p>
+                <p className="text-sm text-[#2B2B2B] mt-1 font-semibold">
                   {selectedMood >= 3 ? '⚡ High energy today! Perfect for an intense workout.' : '🌿 Take it easy. Light yoga recommended.'}
                 </p>
               </div>
             </div>
 
             {/* Hydration Reminder */}
-            <div className="glass-card p-5 border border-cyan-500/20">
-              <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-                <Droplets className="w-4 h-4 text-cyan-400" /> Hydration Reminder
+            <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm bg-[#F8F5F0]">
+              <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center gap-2">
+                <Droplets className="w-4 h-4 text-[#6B705C]" /> Hydration Reminder
               </h3>
               <div className="relative w-24 h-24 mx-auto mb-4">
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 96 96">
-                  <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(6,182,212,0.15)" strokeWidth="8" />
-                  <circle cx="48" cy="48" r="38" fill="none" stroke="#06b6d4" strokeWidth="8"
+                  <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(107,112,92,0.15)" strokeWidth="8" />
+                  <circle cx="48" cy="48" r="38" fill="none" stroke="#6B705C" strokeWidth="8"
                     strokeLinecap="round" strokeDasharray="238.8"
                     strokeDashoffset="238.8"
                     className="animate-progress-circle"
                     style={{ '--target-offset': 238.8 - (waterGlasses / 10) * 238.8 }} />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <Droplets className="w-5 h-5 text-cyan-400" />
-                  <p className="font-bold text-white text-lg">{waterGlasses}/10</p>
+                  <Droplets className="w-5 h-5 text-[#6B705C]" />
+                  <p className="font-bold text-[#2B2B2B] text-lg font-sans">{waterGlasses}/10</p>
                 </div>
               </div>
               <div className="flex gap-2 flex-wrap justify-center mb-3">
                 {Array.from({ length: 10 }).map((_, i) => (
                   <button key={i} onClick={() => setWaterGlasses(i + 1)}
-                    className={`w-7 h-7 rounded-lg border transition-all duration-200 flex items-center justify-center ${
-                      i < waterGlasses ? 'border-cyan-500/60 bg-cyan-500/20' : 'border-white/10 hover:border-cyan-500/30'
+                    className={`w-7 h-7 rounded-lg border transition-all duration-200 flex items-center justify-center cursor-pointer ${
+                      i < waterGlasses ? 'border-[#6B705C]/50 bg-[#6B705C]/15' : 'border-black/5 hover:border-[#6B705C]/30'
                     }`}>
-                    <Droplets className={`w-3 h-3 ${i < waterGlasses ? 'text-cyan-400' : 'text-gray-600'}`} />
+                    <Droplets className={`w-3 h-3 ${i < waterGlasses ? 'text-[#6B705C]' : 'text-gray-300'}`} />
                   </button>
                 ))}
               </div>
-              <button className="w-full neon-btn-outline text-sm py-2">
+              <button className="w-full secondary-btn text-sm py-2">
                 <Droplets className="w-4 h-4" />
                 Log a Glass (+250ml)
               </button>
@@ -157,9 +155,9 @@ export default function SmartFeaturesSection() {
             <BMICalculator />
 
             {/* Goal Completion */}
-            <div className="glass-card p-5 mt-4 border border-purple-500/20">
-              <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-cyan-400" /> Today's Goals
+            <div className="glass-card p-5 mt-4 border border-[#EFE6DD] shadow-sm">
+              <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-[#6B705C]" /> Today's Goals
               </h3>
               <div className="space-y-3">
                 {[
@@ -170,21 +168,21 @@ export default function SmartFeaturesSection() {
                   { label: 'Sleep 8 hours',      done: false },
                 ].map((goal, i) => (
                   <div key={i} className={`flex items-center gap-3 p-2.5 rounded-xl transition-all ${
-                    goal.done ? 'bg-purple-500/10' : 'hover:bg-white/5'
+                    goal.done ? 'bg-[#C97B63]/10' : 'hover:bg-black/5'
                   }`}>
-                    <CheckCircle className={`w-5 h-5 flex-shrink-0 ${goal.done ? 'text-purple-400' : 'text-gray-600'}`} />
-                    <span className={`text-sm ${goal.done ? 'text-gray-400 line-through' : 'text-white'}`}>{goal.label}</span>
-                    {goal.done && <span className="ml-auto text-xs text-cyan-400">Done!</span>}
+                    <CheckCircle className={`w-5 h-5 flex-shrink-0 ${goal.done ? 'text-[#C97B63]' : 'text-gray-300'}`} />
+                    <span className={`text-sm ${goal.done ? 'text-gray-400 line-through' : 'text-[#2B2B2B]'}`}>{goal.label}</span>
+                    {goal.done && <span className="ml-auto text-xs text-[#6B705C]">Done!</span>}
                   </div>
                 ))}
               </div>
               <div className="mt-4">
-                <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-400">Daily completion</span>
-                  <span className="text-white">2/5 goals</span>
+                <div className="flex justify-between text-xs mb-1 font-sans">
+                  <span className="text-[#9B8B7E]">Daily completion</span>
+                  <span className="text-[#2B2B2B]">2/5 goals</span>
                 </div>
-                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                  <div className="h-full w-[40%] bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full" />
+                <div className="h-2 bg-black/5 rounded-full overflow-hidden">
+                  <div className="h-full w-[40%] bg-gradient-to-r from-[#C97B63] to-[#6B705C] rounded-full animate-progress-bar" style={{ '--target-width': '40%' }} />
                 </div>
               </div>
             </div>
@@ -192,22 +190,22 @@ export default function SmartFeaturesSection() {
 
           {/* Right: Smart Meal Recs */}
           <div className="space-y-4">
-            <div className="glass-card p-5 border border-purple-500/20">
-              <h3 className="font-semibold text-white mb-1 flex items-center gap-2">
-                <Brain className="w-4 h-4 text-purple-400" /> AI Meal Recommendations
+            <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm">
+              <h3 className="font-semibold text-[#2B2B2B] mb-1 flex items-center gap-2">
+                <Brain className="w-4 h-4 text-[#C97B63]" /> AI Meal Recommendations
               </h3>
-              <p className="text-xs text-gray-500 mb-4">Based on your macros & preferences</p>
+              <p className="text-xs text-[#9B8B7E] mb-4">Based on your macros & preferences</p>
               <div className="space-y-3">
                 {mealRecs.map((meal, i) => (
-                  <div key={i} className="glass-card p-4 hover:border-purple-500/30 transition-all cursor-pointer group">
+                  <div key={i} className="glass-card p-4 hover:border-[#C97B63]/30 border border-[#EFE6DD] transition-all cursor-pointer group shadow-sm">
                     <div className="flex items-start gap-3">
                       <span className="text-2xl">{meal.emoji}</span>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <p className="font-medium text-white text-sm">{meal.name}</p>
-                          <span className="badge-green text-xs">{meal.match}% match</span>
+                          <p className="font-semibold text-[#2B2B2B] text-sm">{meal.name}</p>
+                          <span className="badge-green text-xs font-sans">{meal.match}% match</span>
                         </div>
-                        <div className="flex gap-3 text-xs text-gray-500 mt-1">
+                        <div className="flex gap-3 text-xs text-[#9B8B7E] mt-1 font-sans">
                           <span>{meal.cal} kcal</span>
                           <span>· {meal.time}</span>
                         </div>
@@ -218,7 +216,7 @@ export default function SmartFeaturesSection() {
                         </div>
                       </div>
                     </div>
-                    <button className="w-full mt-3 text-xs text-purple-400 hover:text-white flex items-center justify-center gap-1 transition-colors">
+                    <button className="w-full mt-3 text-xs text-[#C97B63] hover:text-[#2B2B2B] flex items-center justify-center gap-1 transition-colors cursor-pointer">
                       Add to Log <ChevronRight className="w-3 h-3" />
                     </button>
                   </div>
@@ -227,12 +225,12 @@ export default function SmartFeaturesSection() {
             </div>
 
             {/* AI Insight card */}
-            <div className="glass-card p-5 bg-gradient-to-br from-purple-600/10 to-cyan-600/5 border border-purple-500/20">
+            <div className="glass-card p-5 bg-gradient-to-br from-[#C97B63]/10 to-[#6B705C]/5 border border-[#EFE6DD] shadow-sm">
               <div className="flex items-center gap-2 mb-3">
-                <Zap className="w-4 h-4 text-cyan-400" />
-                <span className="font-semibold text-white text-sm">AI Insight of the Day</span>
+                <Zap className="w-4 h-4 text-[#6B705C]" />
+                <span className="font-semibold text-[#2B2B2B] text-sm">AI Insight of the Day</span>
               </div>
-              <p className="text-sm text-gray-300 leading-relaxed">
+              <p className="text-sm text-[#9B8B7E] leading-relaxed">
                 Your training consistency is excellent! Consider adding 20g more protein post-workout to optimize your muscle synthesis window. Based on your sleep data, Tuesday evening workouts show 23% better performance. 🎯
               </p>
             </div>

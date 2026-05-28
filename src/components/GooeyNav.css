@@ -6,11 +6,11 @@
     1.019 50.8%, 1.018 54.4%, 1 63.1%, 0.995 68%, 1.001 85%, 1
   );
 
-  /* Particle colors — mapped to the app's neon palette */
-  --color-1: #a855f7; /* neon-purple */
-  --color-2: #06b6d4; /* neon-cyan   */
-  --color-3: #3b82f6; /* neon-blue   */
-  --color-4: #ec4899; /* neon-pink   */
+  /* Particle colors — mapped to black/dark for light-theme multiply blending */
+  --color-1: #000000;
+  --color-2: #1c1816;
+  --color-3: #2b2b2b;
+  --color-4: #000000;
 }
 
 .gooey-nav-container {
@@ -31,8 +31,7 @@
   margin: 0;
   position: relative;
   z-index: 3;
-  color: white;
-  text-shadow: 0 1px 1px hsl(205deg 30% 10% / 0.2);
+  color: #5E5E5E;
 }
 
 .gooey-nav-container nav ul li {
@@ -44,7 +43,7 @@
     color 0.3s ease,
     box-shadow 0.3s ease;
   box-shadow: 0 0 0.5px 1.5px transparent;
-  color: rgb(156 163 175); /* gray-400 */
+  color: #5E5E5E;
 }
 
 .gooey-nav-container nav ul li a {
@@ -58,7 +57,7 @@
 }
 
 .gooey-nav-container nav ul li:focus-within:has(:focus-visible) {
-  box-shadow: 0 0 0.5px 1.5px white;
+  box-shadow: 0 0 0.5px 1.5px #2B2B2B;
 }
 
 .gooey-nav-container nav ul li::after {
@@ -66,7 +65,7 @@
   position: absolute;
   inset: 0;
   border-radius: 10px;
-  background: white;
+  background: #2B2B2B;
   opacity: 0;
   transform: scale(0);
   transition: all 0.3s ease;
@@ -74,12 +73,12 @@
 }
 
 .gooey-nav-container nav ul li.active {
-  color: black;
+  color: white;
   text-shadow: none;
 }
 
 .gooey-nav-container nav ul li.active a {
-  color: black;
+  color: white;
 }
 
 .gooey-nav-container nav ul li.active::after {
@@ -102,7 +101,7 @@
 }
 
 .gooey-nav-container .effect.text {
-  color: white;
+  color: #5E5E5E;
   transition: color 0.3s ease;
   font-size: 0.875rem;
   font-weight: 500;
@@ -111,30 +110,30 @@
 }
 
 .gooey-nav-container .effect.text.active {
-  color: black;
+  color: white;
 }
 
 .gooey-nav-container .effect.filter {
   filter: blur(7px) contrast(100) blur(0);
-  mix-blend-mode: lighten;
+  mix-blend-mode: multiply;
 }
 
 .gooey-nav-container .effect.filter::before {
   content: '';
   position: absolute;
   /* Expand horizontally for the gooey contrast trick,
-     but keep vertical expansion tight so no black patch
+     but keep vertical expansion tight so no white patch
      bleeds above or below the nav bar. */
   inset: -4px -75px;
   z-index: -2;
-  background: black;
+  background: white;
 }
 
 .gooey-nav-container .effect.filter::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: white;
+  background: black;
   transform: scale(0);
   opacity: 0;
   z-index: -1;

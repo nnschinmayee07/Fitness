@@ -16,9 +16,9 @@ const DEMO_CHAT = [
 ];
 
 const TypingIndicator = () => (
-  <div className="flex items-center gap-1.5 px-4 py-3 glass-card rounded-2xl rounded-bl-sm w-fit">
+  <div className="flex items-center gap-1.5 px-4 py-3 glass-card rounded-2xl rounded-bl-sm w-fit border border-[#EFE6DD]">
     {[0,1,2].map(i => (
-      <div key={i} className={`w-2 h-2 rounded-full bg-purple-400 typing-dot`} style={{ animationDelay: `${i*0.2}s` }} />
+      <div key={i} className={`w-2 h-2 rounded-full bg-[#C97B63] typing-dot`} style={{ animationDelay: `${i*0.2}s` }} />
     ))}
   </div>
 );
@@ -48,20 +48,20 @@ function ChatWindow({ onClose }) {
   };
 
   return (
-    <div className="fixed bottom-24 right-6 w-80 sm:w-96 h-[520px] z-50 flex flex-col glass-card border border-purple-500/30 shadow-neon-purple rounded-2xl overflow-hidden">
+    <div className="fixed bottom-24 right-6 w-80 sm:w-96 h-[520px] z-50 flex flex-col glass-card border border-[#EFE6DD] shadow-lg rounded-2xl overflow-hidden bg-[#F8F5F0]">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-purple-600/30 to-cyan-600/20 border-b border-white/10 flex-shrink-0">
+      <div className="flex items-center gap-3 px-4 py-3 bg-[#DFD0C2] border-b border-black/5 flex-shrink-0">
         <div className="relative">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-cyan-500 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-[#C97B63] flex items-center justify-center">
             <Bot className="w-5 h-5 text-white" />
           </div>
-          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-dark-900 animate-pulse" />
+          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[#7A9A82] rounded-full border-2 border-[#DFD0C2] animate-pulse" />
         </div>
         <div className="flex-1">
-          <p className="font-semibold text-white text-sm">FitAI Coach</p>
-          <p className="text-xs text-green-400">Online · Powered by AI</p>
+          <p className="font-semibold text-[#2B2B2B] text-sm">FitAI Coach</p>
+          <p className="text-xs text-[#6B705C]">Online · Powered by AI</p>
         </div>
-        <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-gray-400 hover:text-white">
+        <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-black/5 transition-colors text-[#9B8B7E] hover:text-[#2B2B2B] cursor-pointer">
           <X className="w-4 h-4" />
         </button>
       </div>
@@ -71,14 +71,14 @@ function ChatWindow({ onClose }) {
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             {msg.role === 'ai' && (
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-600 to-cyan-500 flex items-center justify-center flex-shrink-0 mr-2 mt-1">
+              <div className="w-7 h-7 rounded-lg bg-[#C97B63] flex items-center justify-center flex-shrink-0 mr-2 mt-1">
                 <Bot className="w-3.5 h-3.5 text-white" />
               </div>
             )}
             <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
               msg.role === 'user'
-                ? 'bg-gradient-to-r from-purple-600 to-cyan-600 text-white rounded-br-sm'
-                : 'glass-card text-gray-200 rounded-bl-sm border border-white/10'
+                ? 'bg-[#C97B63] text-white rounded-br-sm shadow-sm'
+                : 'glass-card text-[#2B2B2B] rounded-bl-sm border border-[#EFE6DD]'
             }`}>
               {msg.text}
             </div>
@@ -86,7 +86,7 @@ function ChatWindow({ onClose }) {
         ))}
         {typing && (
           <div className="flex items-end gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-600 to-cyan-500 flex items-center justify-center flex-shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-[#C97B63] flex items-center justify-center flex-shrink-0">
               <Bot className="w-3.5 h-3.5 text-white" />
             </div>
             <TypingIndicator />
@@ -96,17 +96,17 @@ function ChatWindow({ onClose }) {
       </div>
 
       {/* Suggested prompts */}
-      <div className="px-3 py-2 border-t border-white/5 flex gap-2 overflow-x-auto scrollbar-hide flex-shrink-0">
+      <div className="px-3 py-2 border-t border-black/5 flex gap-2 overflow-x-auto scrollbar-hide flex-shrink-0 bg-[#EFE6DD]/45">
         {SUGGESTED.slice(0,3).map((s) => (
           <button key={s} onClick={() => send(s)}
-            className="flex-shrink-0 text-xs px-3 py-1.5 glass-card rounded-full text-gray-400 hover:text-white hover:border-purple-500/30 transition-all">
+            className="flex-shrink-0 text-xs px-3 py-1.5 glass-card rounded-full text-[#9B8B7E] hover:text-[#2B2B2B] hover:border-[#C97B63]/30 border border-[#EFE6DD] transition-all cursor-pointer">
             {s}
           </button>
         ))}
       </div>
 
       {/* Input */}
-      <div className="p-3 border-t border-white/10 flex-shrink-0">
+      <div className="p-3 border-t border-black/5 flex-shrink-0 bg-[#EFE6DD]/30">
         <div className="flex gap-2">
           <input
             type="text"
@@ -114,11 +114,11 @@ function ChatWindow({ onClose }) {
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && send(input)}
-            className="input-dark text-sm py-2 flex-1"
+            className="input-dark text-sm py-2 flex-1 bg-white border border-[#EFE6DD]"
             id="ai-chat-input"
           />
           <button onClick={() => send(input)}
-            className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-cyan-500 flex items-center justify-center flex-shrink-0 hover:shadow-neon-purple transition-all">
+            className="w-9 h-9 rounded-xl bg-[#C97B63] hover:bg-[#b86b53] flex items-center justify-center flex-shrink-0 transition-all cursor-pointer">
             <Send className="w-4 h-4 text-white" />
           </button>
         </div>
@@ -132,12 +132,12 @@ export default function AIAssistant() {
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-900/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6B705C]/3 to-transparent pointer-events-none" />
       <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-12">
           <span className="badge-cyan mb-3 inline-flex"><Sparkles className="w-3 h-3" /> AI Coach</span>
           <h2 className="section-title">Your <span className="gradient-text">AI Fitness</span> Coach</h2>
-          <p className="text-gray-400 mt-2 max-w-xl mx-auto">
+          <p className="text-[#9B8B7E] mt-2 max-w-xl mx-auto">
             Powered by advanced AI — get personalized advice, meal plans, and workout recommendations 24/7
           </p>
         </div>
@@ -151,11 +151,11 @@ export default function AIAssistant() {
               { icon: '😴', title: 'Recovery Optimization', desc: 'Monitor sleep quality, HRV, and recovery metrics. The AI recommends optimal rest periods and active recovery activities.' },
               { icon: '📊', title: 'Predictive Goal Tracking', desc: 'AI forecasts your progress based on current trends and alerts you before you fall off track.' },
             ].map((feat, i) => (
-              <div key={i} className="glass-card-hover p-5 flex items-start gap-4">
+              <div key={i} className="glass-card-hover p-5 flex items-start gap-4 border border-[#EFE6DD]">
                 <div className="text-2xl flex-shrink-0">{feat.icon}</div>
                 <div>
-                  <p className="font-semibold text-white mb-1">{feat.title}</p>
-                  <p className="text-sm text-gray-400 leading-relaxed">{feat.desc}</p>
+                  <p className="font-semibold text-[#2B2B2B] mb-1">{feat.title}</p>
+                  <p className="text-sm text-[#9B8B7E] leading-relaxed font-sans">{feat.desc}</p>
                 </div>
               </div>
             ))}
@@ -163,39 +163,39 @@ export default function AIAssistant() {
 
           {/* Right: Chat UI preview */}
           <div className="relative">
-            <div className="glass-card border border-purple-500/30 shadow-neon-purple rounded-2xl overflow-hidden">
+            <div className="glass-card border border-[#EFE6DD] shadow-md rounded-2xl overflow-hidden bg-[#F8F5F0]">
               {/* Chat header */}
-              <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-purple-600/20 to-cyan-600/10 border-b border-white/10">
+              <div className="flex items-center gap-3 px-5 py-4 bg-[#DFD0C2] border-b border-black/5">
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-cyan-500 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-[#C97B63] flex items-center justify-center">
                     <Bot className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-dark-900 animate-pulse" />
+                  <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-[#7A9A82] rounded-full border-2 border-[#DFD0C2] animate-pulse" />
                 </div>
                 <div>
-                  <p className="font-semibold text-white">FitAI Coach</p>
-                  <p className="text-xs text-green-400">Online · Analyzing your data...</p>
+                  <p className="font-semibold text-[#2B2B2B]">FitAI Coach</p>
+                  <p className="text-xs text-[#6B705C]">Online · Analyzing your data...</p>
                 </div>
                 <div className="ml-auto flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/60" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-[#C96363]/60" />
+                  <div className="w-3 h-3 rounded-full bg-[#D4A373]/60" />
+                  <div className="w-3 h-3 rounded-full bg-[#7A9A82]/60" />
                 </div>
               </div>
 
               {/* Demo messages */}
-              <div className="p-5 space-y-4 bg-dark-900/50">
+              <div className="p-5 space-y-4 bg-black/5">
                 {DEMO_CHAT.map((msg, i) => (
                   <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} gap-2`}>
                     {msg.role === 'ai' && (
-                      <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-600 to-cyan-500 flex items-center justify-center flex-shrink-0 mt-1">
+                      <div className="w-7 h-7 rounded-lg bg-[#C97B63] flex items-center justify-center flex-shrink-0 mt-1">
                         <Bot className="w-3.5 h-3.5 text-white" />
                       </div>
                     )}
                     <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
                       msg.role === 'user'
-                        ? 'bg-gradient-to-r from-purple-600 to-cyan-600 text-white rounded-br-sm'
-                        : 'glass-card text-gray-300 rounded-bl-sm'
+                        ? 'bg-[#C97B63] text-white rounded-br-sm shadow-sm'
+                        : 'glass-card text-[#2B2B2B] rounded-bl-sm border border-[#EFE6DD]'
                     }`}>
                       {msg.text}
                     </div>
@@ -204,12 +204,12 @@ export default function AIAssistant() {
               </div>
 
               {/* Suggested prompts */}
-              <div className="px-5 py-3 border-t border-white/10">
-                <p className="text-xs text-gray-500 mb-2">Suggested questions:</p>
+              <div className="px-5 py-3 border-t border-black/5 bg-[#EFE6DD]/30">
+                <p className="text-xs text-[#9B8B7E] mb-2">Suggested questions:</p>
                 <div className="flex flex-wrap gap-2">
                   {SUGGESTED.slice(0,3).map(s => (
                     <button key={s} onClick={() => setChatOpen(true)}
-                      className="text-xs px-3 py-1.5 glass-card rounded-full text-gray-400 hover:text-white hover:border-purple-500/30 transition-all">
+                      className="text-xs px-3 py-1.5 glass-card rounded-full text-[#9B8B7E] hover:text-[#2B2B2B] hover:border-[#C97B63]/30 border border-[#EFE6DD] transition-all cursor-pointer">
                       {s}
                     </button>
                   ))}
@@ -217,12 +217,12 @@ export default function AIAssistant() {
               </div>
 
               {/* Input */}
-              <div className="px-5 py-4 border-t border-white/10">
+              <div className="px-5 py-4 border-t border-black/5 bg-[#EFE6DD]/45">
                 <div className="flex gap-3">
                   <input placeholder="Ask about fitness & nutrition..." readOnly onClick={() => setChatOpen(true)}
-                    className="input-dark text-sm flex-1 cursor-pointer" />
+                    className="input-dark text-sm flex-1 cursor-pointer bg-white border border-[#EFE6DD]" />
                   <button onClick={() => setChatOpen(true)}
-                    className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-cyan-500 flex items-center justify-center hover:shadow-neon-purple transition-all">
+                    className="w-10 h-10 rounded-xl bg-[#C97B63] flex items-center justify-center hover:bg-[#b86b53] transition-all cursor-pointer">
                     <Send className="w-4 h-4 text-white" />
                   </button>
                 </div>
@@ -230,7 +230,7 @@ export default function AIAssistant() {
             </div>
 
             {/* Glow */}
-            <div className="absolute inset-0 bg-purple-500/5 rounded-2xl blur-2xl -z-10" />
+            <div className="absolute inset-0 bg-[#C97B63]/5 rounded-2xl blur-2xl -z-10" />
           </div>
         </div>
       </div>
@@ -239,7 +239,7 @@ export default function AIAssistant() {
       <button
         id="open-ai-chat"
         onClick={() => setChatOpen(!chatOpen)}
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-cyan-500 flex items-center justify-center shadow-neon-purple hover:scale-110 transition-all duration-300 neon-pulse"
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-2xl bg-[#C97B63] hover:bg-[#b86b53] flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300 neon-pulse cursor-pointer"
       >
         {chatOpen ? <X className="w-6 h-6 text-white" /> : <Bot className="w-6 h-6 text-white" />}
       </button>
