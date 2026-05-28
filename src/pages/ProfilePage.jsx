@@ -1,8 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Zap, Calendar, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { FadeIn } from '../motion/FadeIn';
+
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+};
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -28,8 +39,9 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-[#1a1814] pt-24">
       <div className="max-w-2xl mx-auto px-4 pb-16">
         <FadeIn>
-          {/* Header Card */}
-          <div className="glass-card p-8 rounded-3xl mb-6">
+          <motion.div variants={containerVariants} initial="hidden" animate="show">
+            {/* Header Card */}
+            <motion.div variants={itemVariants} className="glass-card p-8 rounded-3xl mb-6">
             <div className="flex items-center gap-6 mb-6">
               <div className="w-24 h-24 rounded-full bg-[#C97B63] flex items-center justify-center">
                 <span className="font-display font-black text-3xl text-white">
@@ -61,14 +73,14 @@ export default function ProfilePage() {
                 Complete Profile
               </button>
             )}
-          </div>
+            </motion.div>
 
           {/* Fitness Profile */}
           {user.isOnboarded && (
             <>
               {/* Goal */}
               {user.profile.goal && (
-                <div className="glass-card p-6 rounded-2xl mb-4">
+                <motion.div variants={itemVariants} className="glass-card p-6 rounded-2xl mb-4">
                   <h2 className="font-semibold text-[#F5F5F5] mb-3 text-sm uppercase text-[#C9A889]">
                     Fitness Goal
                   </h2>
@@ -76,12 +88,12 @@ export default function ProfilePage() {
                     <Zap className="w-4 h-4 text-[#C97B63]" />
                     <span className="text-[#C97B63] font-semibold">{user.profile.goal}</span>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Body Stats */}
               {user.profile.stats.age && (
-                <div className="glass-card p-6 rounded-2xl mb-4">
+                <motion.div variants={itemVariants} className="glass-card p-6 rounded-2xl mb-4">
                   <h2 className="font-semibold text-[#F5F5F5] mb-4 text-sm uppercase text-[#C9A889]">
                     Body Stats
                   </h2>
@@ -111,11 +123,11 @@ export default function ProfilePage() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Lifestyle */}
-              <div className="glass-card p-6 rounded-2xl mb-4">
+              <motion.div variants={itemVariants} className="glass-card p-6 rounded-2xl mb-4">
                 <h2 className="font-semibold text-[#F5F5F5] mb-4 text-sm uppercase text-[#C9A889]">
                   Lifestyle
                 </h2>
@@ -140,7 +152,7 @@ export default function ProfilePage() {
               </div>
 
               {/* Stats (Demo) */}
-              <div className="glass-card p-6 rounded-2xl">
+              <motion.div variants={itemVariants} className="glass-card p-6 rounded-2xl">
                 <h2 className="font-semibold text-[#F5F5F5] mb-4 text-sm uppercase text-[#C9A889]">
                   Your Stats
                 </h2>
@@ -161,9 +173,10 @@ export default function ProfilePage() {
                     <p className="text-[#9B8B7E] text-xs">earned</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </>
           )}
+          </motion.div>
         </FadeIn>
       </div>
     </div>

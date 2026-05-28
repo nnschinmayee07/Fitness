@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { FadeIn } from '../motion/FadeIn';
 
@@ -108,9 +109,17 @@ export default function OnboardingPage() {
           </h1>
 
           {/* Content */}
-          <div className="mb-8">
-            {currentStep.type === 'stats' ? (
-              <div className="space-y-4">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="mb-8"
+            >
+              {currentStep.type === 'stats' ? (
+                <motion.div variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }} initial="hidden" animate="show" className="space-y-4">
                 <div>
                   <label className="block text-sm font-semibold text-[#F5F5F5] mb-2">
                     Age
@@ -164,26 +173,30 @@ export default function OnboardingPage() {
                   />
                 </div>
               </div>
-            ) : (
-              <div className="grid gap-3">
-                {currentStep.options.map(option => (
-                  <button
-                    key={option}
-                    onClick={() => handleSelect(option)}
-                    className={`p-4 rounded-2xl text-center font-semibold transition-all duration-200 ${
-                      (currentStep.field === 'goal' && profile.goal === option) ||
-                      (currentStep.field === 'activityLevel' && profile.activityLevel === option) ||
-                      (currentStep.field === 'diet' && profile.diet === option)
-                        ? 'bg-[#C97B63] text-white'
-                        : 'glass-card text-[#D4B5A0] hover:bg-[#22201a]/85'
-                    }`}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+              ) : (
+                <motion.div variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }} initial="hidden" animate="show" className="grid gap-3">
+                  {currentStep.options.map(option => (
+                    <motion.button
+                      key={option}
+                      variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
+                      onClick={() => handleSelect(option)}
+                      className={`p-4 rounded-2xl text-center font-semibold transition-all duration-200 ${
+                        (currentStep.field === 'goal' && profile.goal === option) ||
+                        (currentStep.field === 'activityLevel' && profile.activityLevel === option) ||
+                        (currentStep.field === 'diet' && profile.diet === option)
+                          ? 'bg-[#C97B63] text-white'
+                          : 'glass-card text-[#D4B5A0] hover:bg-[#22201a]/85'
+                      }`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {option}
+                    </motion.button>
+                  ))}
+                </motion.div>
+              )}
+            </motion.div>
+          </AnimatePresence>
 
           {/* Navigation */}
           <div className="flex gap-3">
