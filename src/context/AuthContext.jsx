@@ -53,7 +53,11 @@ export function AuthProvider({ children }) {
       return { success: true };
     } catch (error) {
       console.error('Register error:', error);
-      return { success: false, error: 'Network error' };
+      // Fallback: check if API is not available (local dev without vercel dev)
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        console.warn('API not available. Make sure to run: vercel dev');
+      }
+      return { success: false, error: 'API Error — run "vercel dev" to start the backend' };
     }
   };
 
@@ -76,7 +80,10 @@ export function AuthProvider({ children }) {
       return { success: true };
     } catch (error) {
       console.error('Login error:', error);
-      return { success: false, error: 'Network error' };
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        console.warn('API not available. Make sure to run: vercel dev');
+      }
+      return { success: false, error: 'API Error — run "vercel dev" to start the backend' };
     }
   };
 

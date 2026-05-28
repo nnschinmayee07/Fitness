@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
-import { sql } from '../db.js';
+const jwt = require('jsonwebtoken');
+const { sql } = require('../db.js');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -39,4 +39,4 @@ export default async function handler(req, res) {
     console.error('Auth error:', error);
     return res.status(401).json({ error: 'Invalid or expired token' });
   }
-}
+};

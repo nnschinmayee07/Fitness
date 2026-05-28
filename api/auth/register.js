@@ -1,8 +1,8 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import { sql } from '../db.js';
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { sql } = require('../db.js');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -48,4 +48,4 @@ export default async function handler(req, res) {
     }
     return res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
