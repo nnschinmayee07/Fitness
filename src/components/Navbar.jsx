@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, Zap, X } from 'lucide-react';
+import { Menu, Zap, X, LogOut, User } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const NAV_ITEMS = [
   { label: 'Home',           href: '/' },
@@ -16,8 +17,10 @@ const NAV_ITEMS = [
 export default function Navbar({ toggleSidebar }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [avatarOpen, setAvatarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
@@ -63,7 +66,7 @@ export default function Navbar({ toggleSidebar }) {
               <Zap className="w-4 h-4 text-white" />
             </div>
             <span className="font-display font-bold text-base text-white">
-              Fitness <span className="text-[#C97B63]">App</span>
+              Fitness<span className="text-[#C97B63]">andi</span>
             </span>
           </NavLink>
 
@@ -89,15 +92,46 @@ export default function Navbar({ toggleSidebar }) {
           </div>
 
           {/* Right actions */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <button
-              id="nav-cta"
-              onClick={() => navigate('/dashboard')}
-              className="hidden md:flex glass-btn"
-            >
-              <Zap className="w-3.5 h-3.5" />
-              Start Tracking
-            </button>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            {!user ? (
+              <button
+                onClick={() => navigate('/login')}
+                className="hidden md:flex glass-btn"
+              >
+                Sign In
+              </button>
+            ) : (
+              <div className="relative">
+                <button
+                  onClick={() => setAvatarOpen(prev => !prev)}
+                  className="w-8 h-8 rounded-full bg-[#C97B63] flex items-center justify-center text-white font-semibold text-sm hover:bg-[#b86b53] transition-colors"
+                >
+                  {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                </button>
+                {avatarOpen && (
+                  <div className="absolute right-0 mt-2 w-48 glass-card rounded-xl shadow-lg py-2 z-50">
+                    <div className="px-4 py-2 border-b border-white/10">
+                      <p className="text-[#F5F5F5] font-semibold text-sm">{user.name}</p>
+                      <p className="text-[#C9A889] text-xs">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={() => { navigate('/profile'); setAvatarOpen(false); }}
+                      className="w-full text-left px-4 py-2 text-[#D4B5A0] hover:bg-white/10 flex items-center gap-2 transition-all"
+                    >
+                      <User className="w-4 h-4" />
+                      Profile
+                    </button>
+                    <button
+                      onClick={() => { logout(); navigate('/'); setAvatarOpen(false); }}
+                      className="w-full text-left px-4 py-2 text-[#D4B5A0] hover:bg-white/10 flex items-center gap-2 transition-all border-t border-white/10"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Mobile hamburger */}
             <button
