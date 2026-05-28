@@ -172,7 +172,7 @@ export default function OnboardingPage() {
                     min="1"
                   />
                 </div>
-              </div>
+              </motion.div>
               ) : (
                 <motion.div variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }} initial="hidden" animate="show" className="grid gap-3">
                   {currentStep.options.map(option => (
