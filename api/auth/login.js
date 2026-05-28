@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { sql } = require('../db.cjs');
+const { sql } = require('../db.js');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
