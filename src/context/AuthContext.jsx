@@ -7,79 +7,105 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const session = localStorage.getItem('fitnessandi_session');
-    if (session) {
-      try {
-        setUser(JSON.parse(session));
-      } catch (err) {
-        console.error('Failed to parse session:', err);
-        localStorage.removeItem('fitnessandi_session');
-      }
+    const token = localStorage.getItem('fitnessandi_token');
+    if (token) {
+      verifyToken(token);
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
-  const register = (name, email, password) => {
-    const users = JSON.parse(localStorage.getItem('fitnessandi_users') || '[]');
-    if (users.some(u => u.email === email)) {
-      return { success: false, error: 'Email already registered' };
+  const verifyToken = async (token) => {
+    try {
+      const res = await fetch('/api/auth/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const { user } = await res.json();
+        setUser(user);
+      } else {
+        localStorage.removeItem('fitnessandi_token');
+      }
+    } catch (error) {
+      console.error('Token verification failed:', error);
+      localStorage.removeItem('fitnessandi_token');
+    } finally {
+      setLoading(false);
     }
-
-    const newUser = {
-      id: Date.now().toString(),
-      name,
-      email,
-      password,
-      joinedAt: new Date().toISOString(),
-      profile: {
-        goal: null,
-        stats: { age: null, height: null, weight: null, targetWeight: null },
-        activityLevel: null,
-        diet: null,
-      },
-      isOnboarded: false,
-    };
-
-    users.push(newUser);
-    localStorage.setItem('fitnessandi_users', JSON.stringify(users));
-    localStorage.setItem('fitnessandi_session', JSON.stringify(newUser));
-    setUser(newUser);
-
-    return { success: true };
   };
 
-  const login = (email, password) => {
-    const users = JSON.parse(localStorage.getItem('fitnessandi_users') || '[]');
-    const found = users.find(u => u.email === email && u.password === password);
+  const register = async (name, email, password) => {
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-    if (!found) {
-      return { success: false, error: 'Invalid email or password' };
+      const data = await res.json();
+
+      if (!res.ok) {
+        return { success: false, error: data.error };
+      }
+
+      localStorage.setItem('fitnessandi_token', data.token);
+      setUser(data.user);
+      return { success: true };
+    } catch (error) {
+      console.error('Register error:', error);
+      return { success: false, error: 'Network error' };
     }
+  };
 
-    localStorage.setItem('fitnessandi_session', JSON.stringify(found));
-    setUser(found);
-    return { success: true };
+  const login = async (email, password) => {
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        return { success: false, error: data.error };
+      }
+
+      localStorage.setItem('fitnessandi_token', data.token);
+      setUser(data.user);
+      return { success: true };
+    } catch (error) {
+      console.error('Login error:', error);
+      return { success: false, error: 'Network error' };
+    }
   };
 
   const logout = () => {
-    localStorage.removeItem('fitnessandi_session');
+    localStorage.removeItem('fitnessandi_token');
     setUser(null);
   };
 
-  const updateProfile = (profileData) => {
-    const updated = {
-      ...user,
-      profile: profileData,
-      isOnboarded: true,
-    };
-    const users = JSON.parse(localStorage.getItem('fitnessandi_users') || '[]');
-    const index = users.findIndex(u => u.id === user.id);
-    if (index !== -1) {
-      users[index] = updated;
-      localStorage.setItem('fitnessandi_users', JSON.stringify(users));
+  const updateProfile = async (profileData) => {
+    const token = localStorage.getItem('fitnessandi_token');
+    if (!token) return;
+
+    try {
+      const res = await fetch('/api/auth/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ profile: profileData }),
+      });
+
+      if (res.ok) {
+        const { user } = await res.json();
+        setUser(user);
+      }
+    } catch (error) {
+      console.error('Profile update error:', error);
     }
-    localStorage.setItem('fitnessandi_session', JSON.stringify(updated));
-    setUser(updated);
   };
 
   return (
