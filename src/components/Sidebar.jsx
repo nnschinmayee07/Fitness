@@ -1,8 +1,9 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   X, Home, BarChart2, Utensils, Dumbbell, Bot, Users,
   Sparkles, TrendingUp, Zap, Settings, HelpCircle, LogOut
 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { icon: Home,       label: 'Home',           path: '/' },
@@ -16,6 +17,13 @@ const navItems = [
 ];
 
 export default function Sidebar({ isOpen, onClose }) {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  if (!user) return null;
+
+  const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+
   return (
     <>
       {isOpen && (
@@ -60,13 +68,13 @@ export default function Sidebar({ isOpen, onClose }) {
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="w-12 h-12 rounded-full bg-[#C97B63] flex items-center justify-center text-white font-bold text-lg">
-                  A
+                  {initials}
                 </div>
                 <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#7A9A82] border-2 border-[#1A1A1A]" />
               </div>
               <div>
-                <p className="font-semibold text-[#F5F5F5]">Alex Johnson</p>
-                <p className="text-xs text-[#C9A889]">Pro Member · Day 47 🔥</p>
+                <p className="font-semibold text-[#F5F5F5]">{user.name}</p>
+                <p className="text-xs text-[#C9A889]">{user.isOnboarded ? 'Profile complete' : 'Complete profile'}</p>
               </div>
             </div>
             {/* Stats row */}
@@ -123,7 +131,10 @@ export default function Sidebar({ isOpen, onClose }) {
                 <HelpCircle className="w-5 h-5" />
                 <span className="text-sm font-medium">Help &amp; Support</span>
               </button>
-              <button className="sidebar-item w-full text-[#C96363] hover:text-[#b05454]">
+              <button
+                onClick={() => { logout(); navigate('/'); onClose(); }}
+                className="sidebar-item w-full text-[#C96363] hover:text-[#b05454]"
+              >
                 <LogOut className="w-5 h-5" />
                 <span className="text-sm font-medium">Sign Out</span>
               </button>
