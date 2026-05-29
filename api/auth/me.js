@@ -15,7 +15,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const result = await sql(
+    const result = await sql.query(
       `SELECT id, name, email, joined_at, profile, is_onboarded FROM users WHERE id = $1`,
       [decoded.userId]
     );

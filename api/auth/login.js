@@ -14,7 +14,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const result = await sql(
+    const result = await sql.query(
       `SELECT id, name, email, password_hash, joined_at, profile, is_onboarded FROM users WHERE email = $1`,
       [email]
     );

@@ -16,7 +16,7 @@ module.exports = async function handler(req, res) {
   try {
     const passwordHash = await bcrypt.hash(password, 12);
 
-    const result = await sql(
+    const result = await sql.query(
       `INSERT INTO users (name, email, password_hash) VALUES ($1, $2, $3) RETURNING id, name, email, joined_at, profile, is_onboarded`,
       [name, email, passwordHash]
     );

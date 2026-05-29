@@ -20,7 +20,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const result = await sql(
+    const result = await sql.query(
       `UPDATE users SET profile = $1, is_onboarded = true WHERE id = $2 RETURNING id, name, email, joined_at, profile, is_onboarded`,
       [JSON.stringify(profile), decoded.userId]
     );
