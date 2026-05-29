@@ -37,8 +37,7 @@ export default function Footer() {
                 <Zap className="w-5 h-5 text-white" />
               </div>
               <span className="font-display font-bold text-2xl">
-                <span className="solid-primary">MyFitness</span>
-                <span className="text-[#F0F0F0]">Pal</span>
+                <span className="text-[#F0F0F0]">Fitnessandi</span>
               </span>
             </div>
 
@@ -141,7 +140,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/10">
           <p className="text-sm text-[#C9A889]">
-            © 2026 MyFitnessPal, Inc. All rights reserved. Built for a healthier world.
+            © 2026 Fitnessandi. All rights reserved. Built for a healthier world.
           </p>
           <div className="flex gap-6">
             {['Privacy', 'Terms', 'Cookies', 'Sitemap'].map(link => (

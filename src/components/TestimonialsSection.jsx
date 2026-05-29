@@ -8,7 +8,7 @@ const testimonials = [
     avatarBg: '#C97B63',
     initials: 'SM',
     stars: 5,
-    text: "MyFitnessPal completely transformed my training. The AI coach suggested tweaks to my nutrition that shaved 8 minutes off my marathon time. The analytics dashboard is incredibly insightful!",
+    text: "Fitnessandi completely transformed my training. The AI coach suggested tweaks to my nutrition that shaved 8 minutes off my marathon time. The analytics dashboard is incredibly insightful!",
     stat: '-8 min marathon time',
   },
   {
@@ -98,7 +98,7 @@ export default function TestimonialsSection() {
           <span className="badge-cyan mb-3 inline-flex"><Star className="w-3 h-3 fill-current" /> Testimonials</span>
           <h2 className="section-title">Loved by <span className="solid-primary">Millions</span></h2>
           <p className="text-[#D4B5A0] mt-2 max-w-xl mx-auto">
-            Join 10 million people who've transformed their health with MyFitnessPal
+            Join 10 million people who've transformed their health with Fitnessandi
           </p>
           <div className="flex items-center justify-center gap-3 mt-4">
             <div className="flex gap-0.5">

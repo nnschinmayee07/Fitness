@@ -185,10 +185,20 @@ export default function HeroSection() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity duration-300"
+          style={{
+            animation: 'float 3s ease-in-out infinite',
+          }}>
           <div className="w-px h-8 bg-[#C97B63]/30" />
           <p className="text-xs text-[#C9A889]">Scroll to explore</p>
         </div>
+
+        <style>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(8px); }
+          }
+        `}</style>
       </div>
     </section>
   );
