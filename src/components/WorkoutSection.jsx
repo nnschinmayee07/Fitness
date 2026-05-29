@@ -39,9 +39,9 @@ function Timer() {
   const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
   return (
-    <div className="glass-card p-5 text-center border border-[#EFE6DD] shadow-sm">
-      <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center justify-center gap-2">
-        <Clock className="w-4 h-4 text-[#C97B63]" /> Exercise Timer
+    <div className="glass-card p-6 text-center border border-[#EFE6DD] shadow-sm">
+      <h3 className="font-display font-bold text-[#F5F5F5] text-lg mb-4 flex items-center justify-center gap-3">
+        <Clock className="w-5 h-5 text-[#C97B63]" /> Exercise Timer
       </h3>
       <div className="relative w-32 h-32 mx-auto mb-4">
         <svg className="w-full h-full -rotate-90" viewBox="0 0 128 128">
@@ -89,8 +89,8 @@ export default function WorkoutSection() {
         <div className="text-center mb-12">
           <span className="badge-purple mb-3 inline-flex"><Dumbbell className="w-3 h-3" /> Workouts</span>
           <h2 className="section-title">Your <span className="gradient-text">Fitness Journey</span></h2>
-          <p className="text-[#9B8B7E] mt-2 max-w-xl mx-auto">
-            Structured programs, real-time tracking, and AI-powered workout recommendations
+          <p className="text-[#D4B5A0] mt-3 max-w-xl mx-auto text-lg leading-relaxed font-medium">
+            Structured programs, real-time tracking, and AI-powered workout recommendations tailored to your goals.
           </p>
         </div>
 
@@ -151,10 +151,10 @@ export default function WorkoutSection() {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Exercise list */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm">
+            <div className="glass-card p-6 border border-[#EFE6DD] shadow-sm">
               <div className="flex items-center justify-between mb-5">
-                <h3 className="font-semibold text-[#2B2B2B] flex items-center gap-2">
-                  <Dumbbell className="w-4 h-4 text-[#C97B63]" />
+                <h3 className="font-display font-bold text-[#F5F5F5] text-lg flex items-center gap-3">
+                  <Dumbbell className="w-5 h-5 text-[#C97B63]" />
                   Today's Workout — Upper Body
                 </h3>
                 <span className="badge-purple">In Progress</span>
@@ -193,9 +193,9 @@ export default function WorkoutSection() {
             </div>
 
             {/* Weekly Schedule */}
-            <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm">
-              <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#6B705C]" /> Weekly Schedule
+            <div className="glass-card p-6 border border-[#EFE6DD] shadow-sm">
+              <h3 className="font-display font-bold text-[#F5F5F5] text-lg mb-4 flex items-center gap-3">
+                <Calendar className="w-5 h-5 text-[#6B705C]" /> Weekly Schedule
               </h3>
               <div className="grid grid-cols-7 gap-2">
                 {weekSchedule.map(({ day, workout, done, cal }) => (
@@ -221,9 +221,9 @@ export default function WorkoutSection() {
             <Timer />
 
             {/* Calories burned widget */}
-            <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm">
-              <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center gap-2">
-                <Flame className="w-4 h-4 text-[#C97B63]" /> Today's Burn
+            <div className="glass-card p-6 border border-[#EFE6DD] shadow-sm">
+              <h3 className="font-display font-bold text-[#F5F5F5] text-lg mb-4 flex items-center gap-3">
+                <Flame className="w-5 h-5 text-[#C97B63]" /> Today's Burn
               </h3>
               <div className="text-center mb-4">
                 <p className="font-display font-black text-4xl gradient-text">520</p>

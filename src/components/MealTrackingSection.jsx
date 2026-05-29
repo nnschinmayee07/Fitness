@@ -47,8 +47,8 @@ const MealCard = ({ meal }) => {
               <Icon className={`w-5 h-5 ${meal.color}`} />
             </div>
             <div>
-              <p className="font-semibold text-[#2B2B2B]">{meal.label}</p>
-              <p className="text-xs text-[#9B8B7E]">{meal.time}</p>
+              <p className="font-display font-bold text-[#F5F5F5]">{meal.label}</p>
+              <p className="text-xs text-[#C9A889]">{meal.time}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -113,8 +113,8 @@ export default function MealTrackingSection() {
         <div className="text-center mb-12">
           <span className="badge-cyan mb-3 inline-flex"><Utensils className="w-3 h-3" /> Nutrition</span>
           <h2 className="section-title">Meal <span className="gradient-text">Tracking</span></h2>
-          <p className="text-[#9B8B7E] mt-2 max-w-xl mx-auto">
-            Log your meals effortlessly with our AI-powered food database of 50,000+ items
+          <p className="text-[#D4B5A0] mt-3 max-w-xl mx-auto text-lg leading-relaxed font-medium">
+            Log your meals effortlessly with our AI-powered food database and intelligent nutritional insights.
           </p>
         </div>
 
@@ -156,9 +156,9 @@ export default function MealTrackingSection() {
           {/* Right: Summary panel */}
           <div className="space-y-4">
             {/* Calorie Summary */}
-            <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm">
-              <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center gap-2">
-                <Flame className="w-4 h-4 text-[#C97B63]" /> Daily Summary
+            <div className="glass-card p-6 border border-[#EFE6DD] shadow-sm">
+              <h3 className="font-display font-bold text-[#F5F5F5] text-lg mb-4 flex items-center gap-3">
+                <Flame className="w-5 h-5 text-[#C97B63]" /> Daily Summary
               </h3>
               <div className="relative w-36 h-36 mx-auto mb-4">
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 144 144">
@@ -197,8 +197,8 @@ export default function MealTrackingSection() {
             </div>
 
             {/* Nutrition breakdown */}
-            <div className="glass-card p-5 border border-[#EFE6DD]">
-              <h3 className="font-semibold text-[#2B2B2B] mb-4">Nutrients</h3>
+            <div className="glass-card p-6 border border-[#EFE6DD]">
+              <h3 className="font-display font-bold text-[#F5F5F5] text-lg mb-4">Nutrients</h3>
               {[
                 { label: 'Protein', value: 156, goal: 180, color: '#C97B63' },
                 { label: 'Carbs',   value: 205, goal: 250, color: '#6B705C' },
@@ -222,8 +222,8 @@ export default function MealTrackingSection() {
             </div>
 
             {/* Meal timing */}
-            <div className="glass-card p-5 border border-[#EFE6DD]">
-              <h3 className="font-semibold text-[#2B2B2B] mb-4">Meal Timing</h3>
+            <div className="glass-card p-6 border border-[#EFE6DD]">
+              <h3 className="font-display font-bold text-[#F5F5F5] text-lg mb-4">Meal Timing</h3>
               <div className="relative">
                 <div className="absolute left-3 top-0 bottom-0 w-px bg-black/5" />
                 {meals.map((meal, i) => (

@@ -26,9 +26,9 @@ function BMICalculator() {
   const pct = Math.min(Math.max(((bmi - 10) / 30) * 100, 0), 100);
 
   return (
-    <div className="glass-card p-5 border border-[#EFE6DD] shadow-sm">
-      <h3 className="font-semibold text-[#2B2B2B] mb-4 flex items-center gap-2">
-        <Calculator className="w-4 h-4 text-[#6B705C]" /> BMI Calculator
+    <div className="glass-card p-6 border border-[#EFE6DD] shadow-sm">
+      <h3 className="font-display font-bold text-[#F5F5F5] text-lg mb-4 flex items-center gap-3">
+        <Calculator className="w-5 h-5 text-[#6B705C]" /> BMI Calculator
       </h3>
       <div className="space-y-4">
         <div>
@@ -81,8 +81,8 @@ export default function SmartFeaturesSection() {
         <div className="text-center mb-12">
           <span className="badge-cyan mb-3 inline-flex"><Sparkles className="w-3 h-3" /> Smart Features</span>
           <h2 className="section-title">Powered by <span className="solid-primary">Intelligence</span></h2>
-          <p className="text-[#9B8B7E] mt-2 max-w-xl mx-auto">
-            Futuristic wellness tools that adapt to your lifestyle and optimize your health journey
+          <p className="text-[#D4B5A0] mt-3 max-w-xl mx-auto text-lg leading-relaxed font-medium">
+            Futuristic wellness tools that adapt to your lifestyle and optimize your health journey.
           </p>
         </div>
 
